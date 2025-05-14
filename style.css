@@ -1,0 +1,15 @@
+/* General body font */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Add spacing between navbar links */
+nav a {
+  margin-right: 15px;
+}
+
+/* Margin for section titles */
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
