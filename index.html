@@ -3,9 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kisan Portal</title>
+    <title>AgriTech - Modern Farming Solutions</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <style>
+        /* Custom CSS */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 56px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://source.unsplash.com/random/1200x800/?farm');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .page-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #28a745;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .breed-card img, .tool-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .weather-card {
+            border-left: 4px solid #28a745;
+        }
+        
+        .crop-table th {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .pesticide-list li {
+            margin-bottom: 10px;
+        }
+        
+        .livestock-img {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        /* Hide all sections initially */
+        .page-content {
+            display: none;
+        }
+        
+        /* Show active section */
+        .page-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
      <nav class="navbar navbar-expand-lg navbar-dark bg-success">
@@ -17,87 +96,535 @@
         <a class="btn btn-success text-white" href="#chemicals">Chemicals Guide</a>
       </div>
     </div>
-  </nav>
-  <div class="container" id="market">
-    <h2 class="section-titile text-success">🛒 Farmer Product Marketplace</h2>
-    <form>
-      <div class="mb-3">
-        <label class="form-label">Product Name</label>
-        <input type="text" class="form-control" name="product" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Quantity</label>
-        <input type="number" class="form-control" name="quantity" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Price (per unit)</label>
-        <input type="number" class="form-control" name="price" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Upload Image</label>
-        <input type="file" class="form-control" />
-      </div>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
-  <div class="container" id="'trees">
-    <h2 class="section-title text-success">🌳 Seasonal Tree Plantation Guide</h2>
-    <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>Season</th>
-                <th>Recomended Trees</th>
-                <th>Maintenance Tips</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Summer</td>
-                <td>Mango, Neem, Jamun</td>
-                <td>Water daily, mulch roots</td>
-            </tr>
-            <tr>
-                <td>Monsoon</td>
-                <td>Banana, Coconut, Teak</td>
-                <td>Ensure drainage, prune regularly</td>
-            </tr>
-            <tr>
-                <td>Winter</td>
-                <td>Guava, Amla, Ber</td>
-                <td>Protect from frost, reduce watering</td>
-            </tr>
-        </tbody>
-    </table>
-  </div>
-  <div class="container" id="chemicals">
-     <h2 class="section-title text-success">🧪 Chemicals and Pesticide Guide</h2>
-     <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>Plant</th>
-                <th>Recomended Chemicals</th>
-                <th>Usage Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Wheat</td>
-                <td>Urea, Zinc Sulfate</td>
-                <td>Apply after first irrigation</td>
-            </tr>
-            <tr>
-                <td>Rice</td>
-                <td>Potassium, Neem Oil Spray</td>
-                <td>Use neem oil weekly for pests</td>
-            </tr>
-            <tr>
-                <td>Cotton</td>
-                <td>NPK 19-19-19, Pesticide</td>
-                <td>Use only in early growth stage</td>
-            </tr>
-        </tbody>
-    </table>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Weather & Crops Page Content -->
+    <div id="weather" class="page-content">
+        <section class="page-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="section-title">Weather & Crop Predictions</h2>
+                    </div>
+                </div>
+                
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <div class="card weather-card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Current Weather</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Temperature:</strong> 28°C</p>
+                                        <p><strong>Humidity:</strong> 65%</p>
+                                        <p><strong>Rainfall:</strong> 15mm</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>Wind Speed:</strong> 12 km/h</p>
+                                        <p><strong>Soil Moisture:</strong> Optimal</p>
+                                        <p><strong>Sunlight:</strong> 8 hours/day</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card weather-card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">7-Day Forecast</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Today
+                                        <span class="badge bg-primary rounded-pill">Sunny, 28°C</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Tomorrow
+                                        <span class="badge bg-info rounded-pill">Partly Cloudy, 26°C</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Day 3
+                                        <span class="badge bg-warning rounded-pill">Light Rain, 24°C</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Day 4
+                                        <span class="badge bg-info rounded-pill">Cloudy, 25°C</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Day 5
+                                        <span class="badge bg-primary rounded-pill">Sunny, 27°C</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Recommended Crops for Current Conditions</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered crop-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Crop</th>
+                                                <th>Sowing Period</th>
+                                                <th>Harvest Time</th>
+                                                <th>Expected Yield</th>
+                                                <th>Market Price (per kg)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Wheat</td>
+                                                <td>Nov - Dec</td>
+                                                <td>Mar - Apr</td>
+                                                <td>4-5 tons/acre</td>
+                                                <td>₹2,100 - ₹2,300</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rice</td>
+                                                <td>Jun - Jul</td>
+                                                <td>Oct - Nov</td>
+                                                <td>3-4 tons/acre</td>
+                                                <td>₹1,800 - ₹2,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maize</td>
+                                                <td>Jun - Jul</td>
+                                                <td>Sep - Oct</td>
+                                                <td>2.5-3.5 tons/acre</td>
+                                                <td>₹1,700 - ₹1,900</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Soybean</td>
+                                                <td>Jun - Jul</td>
+                                                <td>Sep - Oct</td>
+                                                <td>1.5-2 tons/acre</td>
+                                                <td>₹3,500 - ₹4,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Recommended Pesticides</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="pesticide-list">
+                                    <li>
+                                        <strong>Neem Oil:</strong> Organic solution for most common pests
+                                    </li>
+                                    <li>
+                                        <strong>Chlorpyrifos:</strong> For stem borers in rice and wheat
+                                    </li>
+                                    <li>
+                                        <strong>Mancozeb:</strong> Fungicide for blight diseases
+                                    </li>
+                                    <li>
+                                        <strong>Imidacloprid:</strong> Systemic insecticide for sucking pests
+                                    </li>
+                                    <li>
+                                        <strong>Glyphosate:</strong> Non-selective herbicide for weed control
+                                    </li>
+                                </ul>
+                                <div class="alert alert-warning mt-3">
+                                    <strong>Note:</strong> Always follow recommended dosage and safety precautions when using pesticides.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Seasonal Farming Tips</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="accordion" id="farmingTipsAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tip1">
+                                                Soil Preparation
+                                            </button>
+                                        </h2>
+                                        <div id="tip1" class="accordion-collapse collapse show" data-bs-parent="#farmingTipsAccordion">
+                                            <div class="accordion-body">
+                                                Test soil pH and nutrient levels before planting. Add organic compost to improve soil structure and fertility.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">
+                                                Water Management
+                                            </button>
+                                        </h2>
+                                        <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#farmingTipsAccordion">
+                                            <div class="accordion-body">
+                                                Implement drip irrigation for water conservation. Monitor soil moisture to avoid over/under watering.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip3">
+                                                Pest Control
+                                            </button>
+                                        </h2>
+                                        <div id="tip3" class="accordion-collapse collapse" data-bs-parent="#farmingTipsAccordion">
+                                            <div class="accordion-body">
+                                                Use integrated pest management (IPM) techniques. Rotate pesticides to prevent resistance development.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modern Tools & Livestock Page Content -->
+    <div id="tools" class="page-content">
+        <section class="page-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="section-title">Modern Tools & Livestock</h2>
+                    </div>
+                </div>
+                
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">Modern Agricultural Tools</h3>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card tool-card h-100">
+                            <img src="https://plus.unsplash.com/premium_photo-1661812376426-26e7af23fab5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fHRyYWN0b3J8ZW58MHx8MHx8fDA%3D" class="card-img-top" alt="Smart Tractor">
+                            <div class="card-body">
+                                <h5 class="card-title">Smart Tractors</h5>
+                                <p class="card-text">GPS-enabled tractors with auto-steering and precision farming capabilities for efficient field operations.</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Fuel efficiency up to 15% better</li>
+                                    <li class="list-group-item">Reduced overlap in field operations</li>
+                                    <li class="list-group-item">Precision planting and fertilizing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card tool-card h-100">
+                            <img src="https://media.istockphoto.com/id/1128102383/photo/farmer-spraying-his-crops-using-a-drone.webp?a=1&b=1&s=612x612&w=0&k=20&c=XX_Adsggd2ew7dHn3HwtYwM4NQF1gqSH_jJbrfbij2s=" class="card-img-top" alt="Agricultural Drone">
+                            <div class="card-body">
+                                <h5 class="card-title">Agricultural Drones</h5>
+                                <p class="card-text">Drones for crop monitoring, spraying pesticides, and field analysis with multispectral imaging.</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Cover 50 acres in 1 hour</li>
+                                    <li class="list-group-item">Precision spraying reduces chemical use</li>
+                                    <li class="list-group-item">Early pest/disease detection</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card tool-card h-100">
+                            <img src="https://images.unsplash.com/photo-1662601618863-183cb68b07bf?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aW90JTIwc29pbCUyMHNlbnNvcnN8ZW58MHx8MHx8fDA%3D" class="card-img-top" alt="Soil Sensor">
+                            <div class="card-body">
+                                <h5 class="card-title">IoT Soil Sensors</h5>
+                                <p class="card-text">Wireless sensors that monitor soil moisture, temperature, and nutrient levels in real-time.</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">24/7 monitoring</li>
+                                    <li class="list-group-item">Mobile alerts for critical conditions</li>
+                                    <li class="list-group-item">Data analytics for better decisions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">Livestock Breeds & Management</h3>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <h4 class="text-success mb-3">Cattle Breeds</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card breed-card h-100">
+                                    <img src="https://images.unsplash.com/photo-1720241917342-71e794445d77?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8SG9sc3RlaW4lMjBGcmllc2lhbiUyMHdpdGglMjBmYW1pbHl8ZW58MHx8MHx8fDA%3D" class="card-img-top" alt="Holstein Cow">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Holstein Friesian</h5>
+                                        <p class="card-text">High milk production breed, yielding 25-30 liters per day. Adaptable to various climates.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card breed-card h-100">
+                                    <img src="https://images.unsplash.com/photo-1620811004671-40b81b6f6978?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGNhdHRsZXxlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="Jersey Cow">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Jersey</h5>
+                                        <p class="card-text">Known for high butterfat content (4.5-5%). Produces 15-20 liters per day.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <h4 class="text-success mb-3">Goat Breeds</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card breed-card h-100">
+                                    <img src="https://images.unsplash.com/photo-1534941725085-38c6e5f65f33?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHNhYW5lbiUyMGdvYXRzfGVufDB8fDB8fHww" class="card-img-top" alt="Saanen Goat">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Saanen</h5>
+                                        <p class="card-text">High milk yield (3-4 liters/day). White coat, adaptable to various environments.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card breed-card h-100">
+                                    <img src="https://plus.unsplash.com/premium_photo-1664303084321-1cc43e97c6fe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGJvZXIlMjBnb2F0fGVufDB8fDB8fHww" class="card-img-top" alt="Boer Goat">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Boer</h5>
+                                        <p class="card-text">Meat breed, fast growth rate. Mature weight 90-100 kg (male), 60-70 kg (female).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">Integrated Farming</h3>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <img src="https://images.unsplash.com/photo-1691886790566-e46e27b25c10?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGRhaXJ5JTIwZmFybWluZ3xlbnwwfHwwfHx8MA%3D%3D" class="img-fluid livestock-img" alt="Dairy Farming">
+                        <h5 class="mt-3">Dairy Farming</h5>
+                        <p>Modern dairy farming techniques including automated milking systems, feed management software, and herd health monitoring.</p>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <img src="https://plus.unsplash.com/premium_photo-1661957803290-695f420ac6ab?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fHBvdWx0cnl8ZW58MHx8MHx8fDA%3D" class="img-fluid livestock-img" alt="Poultry Farming">
+                        <h5 class="mt-3">Poultry Farming</h5>
+                        <p>Advanced poultry housing with climate control, automatic feeding systems, and egg collection conveyors for efficient production.</p>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <img src="https://images.unsplash.com/photo-1563169721-8f27f0921bb8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njd8fGdvYXQlMjBmYXJtaW5nfGVufDB8fDB8fHww" class="img-fluid livestock-img" alt="Goat Farming">
+                        <h5 class="mt-3">Goat Farming</h5>
+                        <p>Profitable goat rearing with proper shelter management, vaccination schedules, and breeding programs for quality stock.</p>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Livestock for Sale</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th>Animal</th>
+                                                <th>Breed</th>
+                                                <th>Age</th>
+                                                <th>Price (₹)</th>
+                                                <th>Location</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cow</td>
+                                                <td>Holstein Friesian</td>
+                                                <td>2 years</td>
+                                                <td>45,000</td>
+                                                <td>Punjab</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Goat</td>
+                                                <td>Boer</td>
+                                                <td>1 year</td>
+                                                <td>12,000</td>
+                                                <td>Maharashtra</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chicken</td>
+                                                <td>Kadaknath</td>
+                                                <td>6 months</td>
+                                                <td>800</td>
+                                                <td>Madhya Pradesh</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Buffalo</td>
+                                                <td>Murrah</td>
+                                                <td>3 years</td>
+                                                <td>65,000</td>
+                                                <td>Haryana</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Login</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Create New Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signupEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Sign Up</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>AgriTech</h5>
+                    <p>Providing modern solutions for farmers to enhance productivity and sustainability in agriculture.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white" onclick="showSection('home')">Home</a></li>
+                        <li><a href="#" class="text-white" onclick="showSection('weather')">Weather & Crops</a></li>
+                        <li><a href="#" class="text-white" onclick="showSection('tools')">Modern Tools</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p>123 Farm Road<br>Agriculture City, AC 12345<br>Email: info@agritech.com<br>Phone: (123) 456-7890</p>
+                    </address>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 AgriTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS for section switching -->
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') === `showSection('${sectionId}')`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
