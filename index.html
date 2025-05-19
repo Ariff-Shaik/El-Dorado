@@ -87,14 +87,92 @@
     </style>
 </head>
 <body>
-     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Smart Kisan Portal</a>
-      <div>
-        <a class="btn btn-success text-white" href="#market">Product Market</a>
-        <a class="btn btn-success text-white" href="#trees">Tree Plantation</a>
-        <a class="btn btn-success text-white" href="#chemicals">Chemicals Guide</a>
-      </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showSection('home')">AgriTech</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('weather')">Weather & Crops</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('tools')">Modern Tools & Livestock</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page Content -->
+    <div id="home" class="page-content active">
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold text-white">Modern Solutions for Traditional Farming</h1>
+                        <p class="lead text-white">Empowering farmers with technology to increase productivity and sustainability.</p>
+                        <button class="btn btn-light btn-lg me-2" onclick="showSection('weather')">Explore Crops</button>
+                        <button class="btn btn-outline-light btn-lg" onclick="showSection('tools')">Farming Tools</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Features Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row text-center mb-5">
+                    <div class="col">
+                        <h2>Our Services</h2>
+                        <p class="lead">Comprehensive agricultural solutions</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm card-hover">
+                            <img src="https://plus.unsplash.com/premium_photo-1661962692059-55d5a4319814?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWdyaWN1bHR1cmV8ZW58MHx8MHx8fDA%3D" class="card-img-top" alt="Crop Prediction">
+                            <div class="card-body">
+                                <h5 class="card-title">Crop Prediction</h5>
+                                <p class="card-text">Get accurate predictions for suitable crops based on weather forecasts and soil conditions.</p>
+                                <button class="btn btn-outline-success" onclick="showSection('weather')">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm card-hover">
+                            <img src="https://images.unsplash.com/photo-1668415762833-e0607ffae375?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fG1vZGVybiUyMHRvb2xzJTIwaW4lMjBmYXJtaW5nfGVufDB8fDB8fHww" class="card-img-top" alt="Modern Tools">
+                            <div class="card-body">
+                                <h5 class="card-title">Modern Tools</h5>
+                                <p class="card-text">Discover the latest agricultural technologies to enhance your farming efficiency.</p>
+                                <button class="btn btn-outline-success" onclick="showSection('tools')">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm card-hover">
+                            <img src="https://images.unsplash.com/photo-1733496632117-2e0b7aec5305?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGxpdmVzJTIwcHJpY2VzJTIwZmFybWluZ3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="Livestock Management">
+                            <div class="card-body">
+                                <h5 class="card-title">Livestock Management</h5>
+                                <p class="card-text">Learn about different breeds and best practices for cattle, goats, and poultry farming.</p>
+                                <button class="btn btn-outline-success" onclick="showSection('tools')">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Weather & Crops Page Content -->
